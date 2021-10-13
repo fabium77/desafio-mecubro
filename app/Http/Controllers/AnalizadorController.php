@@ -394,7 +394,7 @@ class AnalizadorController extends Controller
 
         if ($noSencibles == 0) {
 
-            $ratio = $sencibles;
+            $ratio = "NaN";
 
         } else {
 
