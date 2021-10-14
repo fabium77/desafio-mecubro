@@ -207,11 +207,11 @@ class AnalizadorController extends Controller
         }
 
 
-        $dna = $Request->dna;
+        $dna =  json_encode($Request->dna);
 
         // Verificacion de cadena correcta //
 
-        $error = "Error en la estructura DNA enviada por favor corrabore el DNA";
+        $error = "Error 400 Bad Request";
 
         if (strlen($dna) <> 55) {
 
@@ -305,7 +305,7 @@ class AnalizadorController extends Controller
         // Fin Verificacion de cadena correcta //
 
 
-        $dna = json_decode($Request->dna);
+        $dna = $Request->dna;
 
 
         /* $dna = ["ATGCGA",
@@ -392,18 +392,33 @@ class AnalizadorController extends Controller
 
         $noSencibles = Adn::where('force','=',0)->count();
 
-        if ($noSencibles == 0) {
 
-            $ratio = "NaN";
+
+        if ($noSencibles == 0 and $sencibles == 0) {
+
+            $ratio = "0";
 
         } else {
 
-            $ratio = $sencibles / $noSencibles;
+            if ($noSencibles == 0) {
+
+                $ratio = "NaN";
+
+            }else {
+
+                $ratio = $sencibles / $noSencibles;
+
+            }
+
+
+
+
 
         }
         
+        $json = '[{"force_user_dna": "'.$sencibles.'", "non_force_user_dna": "'.$noSencibles.'", "ratio": "'.$ratio.'"}]';
 
-    	return '{"force_user_dna": '.$sencibles.', "non_force_user_dna": '.$noSencibles.', "ratio": '.$ratio.'}';
+    	return json_decode($json);
 
     }
 
