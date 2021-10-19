@@ -151,7 +151,8 @@ class AnalizadorController extends Controller
         }
 
 
-        function aciertosDiagonal(Request $Request){
+        function aciertosDiagonal($dna){
+
 
             $f = 0;
 
@@ -162,11 +163,15 @@ class AnalizadorController extends Controller
 
             // 1°
 
-            for ($i=0; $i < 4; $i++) { 
+
+            for ($i=0; $i < 4; $i++) {
+
 
                 $diagonales[0][$i] = $dna[$i + 2][$i];
 
             }
+
+
 
             // 2°
 
@@ -305,6 +310,8 @@ class AnalizadorController extends Controller
         // Fin Verificacion de cadena correcta //
 
 
+
+
         $dna = $Request->dna;
 
 
@@ -324,8 +331,8 @@ class AnalizadorController extends Controller
         }
 
 
-
         $aciertosAcum = aciertosColumnas($dna);
+
 
         if ( $aciertosAcum >= 2) {
 
@@ -340,6 +347,7 @@ class AnalizadorController extends Controller
             return 'HTTP 200-OK';
 
         }
+
 
         $aciertosAcum = $aciertosAcum + aciertosFilas($dna);
 
@@ -357,7 +365,9 @@ class AnalizadorController extends Controller
 
         }
 
+
         $aciertosAcum = $aciertosAcum + aciertosDiagonal($dna);
+
         
         if ( $aciertosAcum >= 2) {
             

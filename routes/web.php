@@ -19,7 +19,7 @@ use App\Http\Controllers\AnalizadorController;
 
 Route::get('/', [AnalizadorController::class, 'index']);
 
-Route::post('/force-users', [AnalizadorController::class, 'analizar'])->name('force-users');
+Route::get('/force-users', [AnalizadorController::class, 'analizar'])->name('force-users');
 
 Route::post('/stats', [AnalizadorController::class, 'stats'])->name('stats');
 
